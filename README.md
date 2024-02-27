@@ -94,7 +94,7 @@ A PowerShell (Core) script that receives the necessary parameters and converts t
 The pipeline has the following input parameters:
 | Name | Mandatory | Type | Description | Example |
 |--|--|--|--|--|
-| queryBody | Yes | String | "{ 'param1' : 'param1value', 'param2' : 'param2value', 'param3' : []}"
+| queryBody | Yes | String | The body to create a new document. | "{ 'param1' : 'param1value', 'param2' : 'param2value', 'param3' : []}" |
 
 #### 6.1.2 Tasks
 
