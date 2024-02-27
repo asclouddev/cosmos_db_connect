@@ -71,7 +71,7 @@ This script get the following parameters from environment variables for create a
 - **DATABASE_NAME**: string with the name of the database.
 - **COLLECTION_ID**: string with the name of the collection id.
 - **CREATE_BODY**: A JSON file in base64 encoded with a valid body used in the cosmos [Create a document REST API](https://learn.microsoft.com/en-us/rest/api/cosmos-db/create-a-document#body).
-- The previous parameters explained in [4.1](#azure_client)
+- The previous parameters explained in [4.1](#41-azure-credentials)
 
 #### 4.2.2 list_cosmos_documents.py
 
