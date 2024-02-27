@@ -7,7 +7,7 @@ This repository has the code to be able to connect to an Azure Cosmos DB databas
 ## 2.0 File Structure
 
 - **create-document.yaml**: Azure Pipeline to execute the creation of a document in a collection.
-- **list-documents.yaml**: Azure Pipeline to execute the get the list of a documents in a collection.
+- **list-documents.yaml**: Azure Pipeline to get the list of a documents in a collection.
 - **cosmos_db_create_document**: Folder with the scripts, execution and inizializer.
   - initialization_script.ps1: It collects the data it receives from the pipeline and transforms it to send it as environment variables to be used in the create_cosmos_document.py script.
   - create_cosmos_document.py: Script to authenticate against the database and create a document in the collection.
@@ -94,7 +94,10 @@ A PowerShell (Core) script that receives the necessary parameters and converts t
 The pipeline has the following input parameters:
 | Name | Mandatory | Type | Description | Example |
 |--|--|--|--|--|
-| queryBody | Yes | String | The body to create a new document. | "{ 'param1' : 'param1value', 'param2' : 'param2value', 'param3' : []}" |
+| CreateBody | Yes | String | The body to create a new document. | { 'param1' : 'param1value', 'param2' : 'param2value', 'param3' : []} |
+| CosmosAccountName | Yes | String | Cosmos Account Name to create a new document. | mycosmosdb01 |
+| DatabaseName | Yes | String | Cosmos Database to create a new document. | db01 |
+| CollectionID | Yes | String | CollectionID where the document will be created. | coll01 |
 
 #### 6.1.2 Tasks
 
@@ -110,6 +113,9 @@ The pipeline has the following input parameters:
 | Name | Mandatory | Type | Description | Example |
 |--|--|--|--|--|
 | NumberOfDocuments | No | Number | Number of documents to be logged in the log sorted by the newest ones. Default value is 10 | 20 |
+| CosmosAccountName | Yes | String | Cosmos Account Name to create a new document. | mycosmosdb01 |
+| DatabaseName | Yes | String | Cosmos Database to create a new document. | db01 |
+| CollectionID | Yes | String | CollectionID where the document will be created. | coll01 |
 
 #### 6.2.2 Tasks
 

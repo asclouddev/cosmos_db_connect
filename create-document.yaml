@@ -1,0 +1,40 @@
+name: $(Build.DefinitionName)-$(SourceBranchName)-$(Date:yyyyMMdd).$(Rev:rr)
+parameters:
+  - name: CreateBody
+    displayName: "The body to create a new document. Example { 'param1' : 'param1value', 'param2' : 'param2value', 'param3' : []}"
+    type: string
+  - name: CosmosAccountName
+    displayName: "Cosmos Account Name to create a new document. Example: mycosmosdb01"
+    type: string
+  - name: DatabaseName
+    displayName: "Cosmos Database to create a new document. Example: db01"
+    type: string
+  - name: CollectionID
+    displayName: "CollectionID where the document will be created. Example: coll01"
+    type: string
+trigger: none
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: AzureCLI@2
+    displayName: Inicialize Context
+    inputs:
+      azureSubscription: sc_client_emulation_02
+      addSpnToEnvironment: true
+      failOnStandardError: true
+      scriptType: pscore
+      scriptLocation: scriptPath
+      scriptPath: "$(Build.SourcesDirectory)/cosmos_db_create_document/inicialization_script.ps1"
+      arguments: >
+        -CreateBody "${{ parameters.CreateBody}}"
+        -CosmosAccountName "${{ parameters.CosmosAccountName}}"
+        -DatabaseName "${{ parameters.DatabaseName}}"
+        -CollectionID "${{ parameters.CollectionID}}"
+  - script: python -m pip install azure-identity
+    displayName: Install requirements
+  - task: PythonScript@0
+    displayName: Create CosmosDB Document
+    inputs:
+      scriptSource: "filePath"
+      scriptPath: "$(Build.SourcesDirectory)/cosmos_db_create_document/create_cosmos_document.py"
